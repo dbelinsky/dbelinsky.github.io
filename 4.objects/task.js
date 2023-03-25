@@ -7,32 +7,24 @@ function Student(name, gender, age) {
   
   Student.prototype.setSubject = function (subjectName) {
     this.subject = subjectName;
-  };
+  }
   
   Student.prototype.addMarks = function (...marks) {
-    if (this.marks !== undefined) {
+    if (this.hasOwnProperty('marks')) {
       this.marks.push(...marks);
     }
-  };
+  }
   
   Student.prototype.getAverage = function () {
-    let sum = 0;
-    let count = 0;
-    let result;
-    if (this.marks !== undefined && this.marks.length > 0) {
-      for (let mark of this.marks) {
-        sum += mark;
-        count += 1;
-      }
-      result = sum / count;
+    if (this.hasOwnProperty('marks') && (this.marks).length > 0){
+      return (this.marks.reduce( (acc, current) => acc + current) ) / (this.marks).length;
     } else {
-      result = 0;
+      return 0;
     }
-    return result;
-  };
+  }
   
   Student.prototype.exclude = function (reason) {
-    delete this.marks;
     delete this.subject;
+    delete this.marks;
     this.excluded = reason;
-  };
+  }
