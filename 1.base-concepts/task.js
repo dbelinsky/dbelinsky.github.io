@@ -1,35 +1,38 @@
-"use strict"
+"use strict";
 function solveEquation(a, b, c) {
   let arr = [];
-  let D = b**2-4*a*c;
-  let x1, x2;
-  if (d < 0 ) {
-    console.log('корней нет')
+  let d = Math.pow(b, 2) - 4 * a * c;
+  if (d < 0) {
+    arr = [];
+  } else if (d == 0) {
+    arr.push(-b / (2 * a));
+  } else if (d > 0) {
+    arr.push((-b + Math.sqrt(d)) / (2 * a));
+    arr.push((-b - Math.sqrt(d)) / (2 * a));
   }
-  else if (D === 0) {
-    x1 = -b/(2*a);
-    console.log ('один корень')
-  }
-  else is (D > 0) {
-    x1 = (-b + Math.sqrt(d) )/(2*a);
-    x2 = (-b - Math.sqrt(d) )/(2*a);
-    console.log('два корня')
-    arr.push(x);
-    arr.push(x1);
-  }
+
   return arr;
-  console.log(arr);
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-  percent = Number(percent);
-  contribution = Number(contribution);
-  amount = Number(amount);
-  countMonths = Number(countMonths);
+  if (
+    isNaN(percent) ||
+    isNaN(contribution) ||
+    isNaN(amount) ||
+    isNaN(countMonths)
+  ) {
+    console.log("Один из параметров содержит неверное значение");
+    return false;
+  }
 
-  percent = (percent / 100) / 12;
-  const loanBody = amount - contribution;
-  const monthlyInstallment = loanBody * (percent + (percent / (((1 + percent) ** countMonths) - 1)));
-  const totalAmount = (monthlyInstallment * countMonths);
-  return totalAmount === 0 ? console.log(totalAmount.toFixed(0)) : console.log(totalAmount.toFixed(2));
+  let percentPerMonth = percent / 100 / 12;
+  let creditBody = amount - contribution;
+  let payPerMonth =
+    creditBody *
+    (percentPerMonth +
+      percentPerMonth / ((1 + percentPerMonth) ** countMonths - 1));
+  let totalTest = payPerMonth * countMonths;
+  let result = Number(totalTest.toFixed(2));
+
+  return result;
 }
