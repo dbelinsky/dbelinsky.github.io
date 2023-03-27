@@ -5,6 +5,7 @@
     return Number.parseFloat(value);
 }
 
+
 function validateCount(value) {
     try {
         return parseCount(value);
@@ -13,17 +14,18 @@ function validateCount(value) {
     }
 }
 
+
 class Triangle {
     constructor(a, b, c) {
         if ((a + b) < c || (b + c) < a || (c + a) < b) {
-            throw error ('Треугольник с такими сторонами не существует');
+            throw new Error('Треугольник с такими сторонами не существует');
         }
         this.a = a,
         this.b = b,
         this.c = c
     }
     get perimeter() {
-        return this.a + this.b + this.c
+        return this.a + this.b + this.c;
     }
     get area() {
         const perimeter = this.a + this.b + this.c;
